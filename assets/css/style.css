@@ -21,6 +21,17 @@ h1 {
     padding: 25px;
 }
 
+#status-text{
+    color: orange;
+    font-size: 30px ;
+    
+}
+
+#button-area{
+    border:3px solid black;
+    padding: 20px;
+}
+
 /* Controls and Message Styles */
 .controls {
     padding: 20px;

@@ -1,15 +1,53 @@
 // TODO: Declare any global variables we need
+let countHeads = 0;
+let percentageHeads = 0;
 
+let countTails = 0;
+let percentageTails = 0;
+
+let countClicks = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
-    // This is just a sanity check to make sure your JavaScript script is getting loaded
-    // You can remove it once you see it in your browser console in the developer tools
-    console.log('Hi')
-
+    let flipButton = document.querySelector("#flip")
+    let clearButton = document.querySelector("#clear")
+    
+    let imageSelector = document.querySelector("#penny-img")
+    let statusSelector = document.querySelector("#status-text")
+    
+    let headsCount = document.querySelector("#heads")
+    let headsPct = document.querySelector("#heads-percent")
+    let tailsCount = document.querySelector("#tails")
+    let tailsPct = document.querySelector("#tails-percent")
     // TODO: Add event listener and handler for flip and clear buttons
+    flipButton.addEventListener("click", function(e){
+       // TODO: Determine flip outcome
+       countClicks ++;
 
+       let result = Math.random (); //heads:0.0 - 0.50; tails: 0.51 -1.0
+       console.log(result) 
+       if(result <= 0.5){
+            //heads
+            imageSelector.src = "./assets/images/penny-heads.jpg" //match the image with the result
+            statusSelector.textContent = "You flipped Heads!"//update status message with result
+            countHeads ++ //update the count
+            headsCount.textContent = `${countHeads}`
+        } else {
+            //tails
+            imageSelector.src = "./assets/images/penny-tails.jpg"
+            statusSelector.textContent = "You flipped Tails!"
+            countTails ++ //update the count
+            tailsCount.textContent = `${countTails}`
+        }
+
+        //percentages of heads and tails
+        percentageHeads = Math.round((countHeads/countClicks) * 100)
+        headsPct.textContent = `${percentageHeads}%`
+        percentageTails = Math.round((countTails/countClicks) * 100)
+        tailsPct.textContent = `${percentageTails}%`
+        console.log(`heads %`, headsPct, `tails %`, tailsPct)
+    })
     // Flip Button Click Handler
-        // TODO: Determine flip outcome
+        
         // TODO: Update image and status message in the DOM
 
         // Update the scorboard
@@ -21,7 +59,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Clear Button Click Handler
-        // TODO: Reset global variables to 0
+clearButton.addEventListener("click", function(e){
+    
+    imageSelector.src = "./assets/images/penny-heads.jpg"    
+    // TODO: Reset global variables to 0
+        headsCount.textContent = "0"
+        headsPct.textContent = "0%"
+        tailsCount.textContent = "0"
+        tailsPct.textContent = "0%"
         // TODO: Update the scoreboard (same logic as in flip button click handler)
+        countHeads = 0;
+        percentageHeads = 0;
+        countTails = 0;
+        percentageTails = 0;
+        countClicks = 0;
 
+        statusSelector.textContent = "Let's Get Rolling!"
+    })
 })
